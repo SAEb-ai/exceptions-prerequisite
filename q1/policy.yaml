@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: limit-containers-per-pod
+spec:
+  validationFailureAction: Enforce
+  rules:
+    - name: limit-containers-count-to-2
+      match:
+        any:
+        - resources:
+            kinds:
+            - Pod
+      validate:
+        message: "Containers count for a Pod should be less than or equal to 2."
+        deny:
+          conditions:
+            any:
+            - key: "{{length(request.object.spec.containers[])}}"
+              operator: GreaterThan
+              value: "2"
+

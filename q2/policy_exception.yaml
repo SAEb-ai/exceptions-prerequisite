@@ -1,0 +1,26 @@
+apiVersion: kyverno.io/v2alpha1
+kind: PolicyException
+metadata:
+  name: limit-containers-exception
+  namespace: delta
+spec:
+  exceptions:
+  - policyName: limit-containers-per-pod
+    ruleNames:
+    - limit-containers-count-to-2
+  match:
+    any:
+    - resources:
+        kinds:
+        - Pod
+        - Deployment
+        namespaces:
+        - delta
+        names:
+        - important-tool
+  preconditions:
+    any:
+    - key: "{{ request.object.metadata.labels.app || '' }}"
+      operator: Equals
+      value: limit-containers
+
