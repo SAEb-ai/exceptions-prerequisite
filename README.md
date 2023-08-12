@@ -1,1 +1,1 @@
-# exceptions-prerequisite
+This is the prerequisite task for applying for https://github.com/kyverno/kyverno/issues/7907 in LFX. More details can be found [here](https://docs.google.com/document/d/1iuRMW-pg9lFb48L0LK_PdyZk65xt9EVO73yQJQaO7Ic/edit).
